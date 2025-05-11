@@ -73,6 +73,23 @@ static const char *vmute[]    = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT
 static const char *lock[]     = { "/bin/bash", "-c", "cat /etc/issue | head -n 14 | xargs -0 -I {} physlock -m -p \"{}Artix Linux $(uname -r)\"", NULL};
 static const char *pdf[]      = { "pdf", NULL };
 
+void set_layout(Arg const* arg ) {
+    static int last_layout = 0;
+    static int curr_layout = 0;
+
+    if (curr_layout == arg->i) {
+        curr_layout = last_layout;
+        last_layout = arg->i;
+    } else {
+        last_layout = curr_layout;
+        curr_layout = arg->i;
+    }
+
+    Arg layout = {.v = &layouts[curr_layout]};
+    setlayout(&layout);
+}
+
+
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
@@ -87,9 +104,9 @@ static const Key keys[] = {
     { MODKEY,                       XK_Return, zoom,           {0} },
     { MODKEY,                       XK_Tab,    view,           {0} },
     { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-    { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-    { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-    { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+    { MODKEY,                       XK_t,      set_layout,      {.i = 0} },
+    { MODKEY,                       XK_f,      set_layout,      {.i = 1} },
+    { MODKEY,                       XK_m,      set_layout,      {.i = 2} },
 //  { MODKEY,                       XK_space,  setlayout,      {0} },
     { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
     { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
