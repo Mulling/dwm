@@ -193,7 +193,7 @@ static void focusstack(const Arg *arg);
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
-static unsigned int getsystraywidth();
+static unsigned int getsystraywidth(void);
 static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
@@ -988,7 +988,7 @@ getatomprop(Client *c, Atom prop)
 }
 
 unsigned int
-getsystraywidth()
+getsystraywidth(void)
 {
     unsigned int w = 0;
     Client *i;
@@ -1135,6 +1135,8 @@ keypress(XEvent *e)
 void
 killclient(const Arg *arg)
 {
+    (void)arg;
+
     if (!selmon->sel)
         return;
 
@@ -1273,6 +1275,8 @@ motionnotify(XEvent *e)
 void
 movemouse(const Arg *arg)
 {
+    (void)arg;
+
     int x, y, ocx, ocy, nx, ny;
     Client *c;
     Monitor *m;
@@ -1397,6 +1401,7 @@ propertynotify(XEvent *e)
 void
 quit(const Arg *arg)
 {
+    (void)arg;
     running = 0;
 }
 
@@ -1473,6 +1478,8 @@ resizerequest(XEvent *e)
 void
 resizemouse(const Arg *arg)
 {
+    (void)arg;
+
     int ocx, ocy, nw, nh;
     Client *c;
     Monitor *m;
@@ -1906,6 +1913,8 @@ tile(Monitor *m)
 void
 togglebar(const Arg *arg)
 {
+    (void)arg;
+
     selmon->showbar = !selmon->showbar;
     updatebarpos(selmon);
     resizebarwin(selmon);
@@ -1926,6 +1935,8 @@ togglebar(const Arg *arg)
 void
 togglefloating(const Arg *arg)
 {
+    (void)arg;
+
     if (!selmon->sel)
         return;
     if (selmon->sel->isfullscreen) /* no support for fullscreen windows */
@@ -2065,7 +2076,7 @@ updatebarpos(Monitor *m)
 }
 
 void
-updateclientlist()
+updateclientlist(void)
 {
     Client *c;
     Monitor *m;
@@ -2459,6 +2470,9 @@ xerror(Display *dpy, XErrorEvent *ee)
 int
 xerrordummy(Display *dpy, XErrorEvent *ee)
 {
+    (void)dpy;
+    (void)ee;
+
     return 0;
 }
 
@@ -2467,6 +2481,9 @@ xerrordummy(Display *dpy, XErrorEvent *ee)
 int
 xerrorstart(Display *dpy, XErrorEvent *ee)
 {
+    (void)dpy;
+    (void)ee;
+
     die("dwm: another window manager is already running");
     return -1;
 }
@@ -2490,6 +2507,8 @@ systraytomon(Monitor *m) {
 void
 zoom(const Arg *arg)
 {
+    (void)arg;
+
     Client *c = selmon->sel;
 
     if (!selmon->lt[selmon->sellt]->arrange || !c || c->isfloating)
@@ -2502,6 +2521,8 @@ zoom(const Arg *arg)
 void
 kbl (const Arg* arg)
 {
+    (void)arg;
+
     static unsigned char i = 0;
 
     // Avoid having to deal with strings
