@@ -70,7 +70,7 @@ static const char *termcmd[]  = { "/usr/local/bin/st", NULL };
 static const char *vup[]      = { "volume", "+5", NULL };
 static const char *vdown[]    = { "volume", "-5", NULL };
 static const char *vmute[]    = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
-static const char *lock[]     = { "/bin/bash", "-c", "cat /etc/issue | head -n 14 | xargs -0 -I {} physlock -m -p \"{}Artix Linux $(uname -r)\"", NULL};
+static const char *lock[]     = { "/bin/bash", "-c", "cat /etc/issue | head -n 14 | xargs -0 -I {} physlock -m -p \"{}Locked $(uname -r)\"", NULL};
 static const char *pdf[]      = { "pdf", NULL };
 
 void set_layout(Arg const* arg ) {

@@ -2529,20 +2529,18 @@ kbl (const Arg* arg)
     static char *layouts[] = {
         "setxkbmap -layout us -variant intl",
         "setxkbmap -layout us",
-        "setxkbmap -layout br"
     };
 
     static char *notifys[] = {
-        "notify-send -r 69 \"Layout: US Variant: intl\"",
-        "notify-send -r 69 \"Layout: US\"",
-        "notify-send -r 69 \"Layout: BR\""
+        "dunstify -u low -h string:x-dunst-stack-tag:kbl \"Layout: US Variant: intl\"",
+        "dunstify -u low -h string:x-dunst-stack-tag:kbl \"Layout: US\""
     };
 
     // NOTE: should probably check for errors
     system(layouts[i]);
     system(notifys[i]);
 
-    i = (i + 1) % 3;
+    i = (i + 1) % 2;
 }
 
 
